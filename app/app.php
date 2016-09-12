@@ -5,6 +5,8 @@
 
     $app = new Silex\Application();
 
+    $app['debug'] = true;
+
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
@@ -14,10 +16,10 @@
     });
 
     $app->post("/results", function() use ($app){
-    $input = $_POST['number'];
+       $input = $_POST['number'];
        $processor = new PingPong();
        $output = $processor->pingponggenerator($input);
-    //    var_dump($input);
+    //    var_dumb($output);
        return $app['twig']->render('result.html.twig', array('results'=>$output));
    });
 
